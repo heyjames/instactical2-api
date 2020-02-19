@@ -57,6 +57,12 @@ app.get("/api/blogposts/:slug", async (req, res) => {
   res.send(blogPost);
 });
 
+app.delete("/api/blogposts/:slug", async (req, res) => {
+  const blogPost = await Blogpost.findOneAndDelete({ slug: req.params.slug });
+  // console.log(blogPost);
+  res.send(blogPost);
+});
+
 app.put("/api/blogposts/:slug", async (req, res) => {
   const blogPost = await Blogpost.findOneAndUpdate(
     req.params.slug,
