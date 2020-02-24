@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const Blogpost = mongoose.model('Blogposts', new mongoose.Schema({
-  "_id": false,
+  // "_id": false,
   featured: {
     type: String,
     required: true,
