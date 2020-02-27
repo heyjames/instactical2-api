@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const { Announcement } = require("./models/announcement");
 const { Blogpost } = require("./models/blogpost");
 const { About } = require("./models/about");
+const { Guideline } = require("./models/guideline");
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 
@@ -225,6 +226,22 @@ app.put("/api/about", async (req, res) => {
   );
 
   res.send(about);
+});
+
+app.get("/api/guidelines", async (req, res) => {
+  const result = await Guideline.find();
+  // console.log(result);
+  res.send(result);
+});
+
+app.post("/api/guidelines", async (req, res) => {
+  const result = new Guideline({
+    title: req.body.title,
+    content: req.body.content
+  });
+  // console.log(result);
+  await result.save();
+  res.send(result);
 });
 
 // ============================================================
