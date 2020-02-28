@@ -234,6 +234,20 @@ app.get("/api/guidelines", async (req, res) => {
   res.send(result);
 });
 
+app.put("/api/guidelines", async (req, res) => {
+  // console.log(req.body._id);
+  const result = await Guideline.findByIdAndUpdate(
+    req.body._id,
+    {
+      title: req.body.title,
+      content: req.body.content
+    },
+    { new: true }
+  );
+  // console.log(result);
+  res.send(result);
+});
+
 app.post("/api/guidelines", async (req, res) => {
   const result = new Guideline({
     title: req.body.title,
