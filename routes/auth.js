@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send(errMsg);
 
-  const token = user.generateAuthToken();
+  const token = user.generateAuthToken(); // This actually should be sent via HTTPS
 
   res.send(token);
 });

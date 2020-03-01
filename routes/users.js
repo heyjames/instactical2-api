@@ -5,7 +5,13 @@ const { User, validate } = require("../models/user");
 const bcrypt = require('bcrypt');
 const dbDebugger = require("debug")("app:db");
 const _ = require("lodash");
+const authorize = require("../middleware/auth");
 // try npm i joi-password-complexity
+
+router.get("/me", authorize, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  res.send(user);
+});
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);

@@ -1,6 +1,3 @@
 {
-  "mail": {
-    "password": "inst_password"
-  },
   "jwtPrivateKey": "inst_jwtPrivateKey"
 }
