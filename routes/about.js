@@ -1,16 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const Joi = require('joi');
-const { About } = require("../models/about");
+const { About, validate } = require("../models/about");
 const authorize = require("../middleware/auth");
+
+const errMsg = "The About post with the given ID was not found.";
 
 router.get("/", async (req, res) => {
   const result = await About.find();
-  // console.log(result);
+
   res.send(result);
 });
 
 router.put("/", authorize, async (req, res) => {
+  const { error } = validate(req.body)
+  if (error) return res.status(400).send(error.details[0].message);
+
   const about = await About.findByIdAndUpdate(
     req.body._id,
     {
@@ -19,6 +24,7 @@ router.put("/", authorize, async (req, res) => {
     },
     { new: true }
   );
+  if (!about) return res.status(404).send(errMsg);
 
   res.send(about);
 });

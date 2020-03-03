@@ -1,4 +1,5 @@
 {
   "name": "My Express App",
-  "jwtPrivateKey": ""
+  "jwtPrivateKey": "",
+  "api_server_info": "http://insurgency.pro/api/45.77.203.74:27122"
 }

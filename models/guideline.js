@@ -17,4 +17,13 @@ const Guideline = new mongoose.model('Guideline', new mongoose.Schema({
   }
 }));
 
+function validateGuideline(guideline) {
+  const schema = {
+    content: Joi.string().min(1).required()
+  };
+
+  return Joi.validate(guideline, schema);
+}
+
 exports.Guideline = Guideline;
+exports.validate = validateGuideline;

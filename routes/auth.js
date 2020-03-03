@@ -3,7 +3,6 @@ const router = express.Router();
 const Joi = require('joi');
 const { User } = require("../models/user");
 const bcrypt = require('bcrypt');
-const dbDebugger = require("debug")("app:db");
 const _ = require("lodash");
 // try npm i joi-password-complexity
 

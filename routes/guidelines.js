@@ -1,17 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const Joi = require('joi');
-const { Guideline } = require("../models/guideline");
+const { Guideline, validate } = require("../models/guideline");
+
+const errMsg = "The guideline with the given ID was not found.";
 
 router.get("/", async (req, res) => {
-  const result = await Guideline.find();
-  // console.log(result);
-  res.send(result);
+  const guideline = await Guideline.find();
+
+  res.send(guideline);
 });
 
 router.put("/", async (req, res) => {
-  // console.log(req.body._id);
-  const result = await Guideline.findByIdAndUpdate(
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const guideline = await Guideline.findByIdAndUpdate(
     req.body._id,
     {
       title: req.body.title,
@@ -19,18 +23,23 @@ router.put("/", async (req, res) => {
     },
     { new: true }
   );
-  // console.log(result);
-  res.send(result);
+  if (!guideline) return res.status(404).send(errMsg);
+
+  res.send(guideline);
 });
 
 router.post("/", async (req, res) => {
-  const result = new Guideline({
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  const guideline = new Guideline({
     title: req.body.title,
     content: req.body.content
   });
-  // console.log(result);
-  await result.save();
-  res.send(result);
+  if (!guideline) return res.status(404).send(errMsg);
+
+  await guideline.save();
+  res.send(guideline);
 });
 
 module.exports = router;
