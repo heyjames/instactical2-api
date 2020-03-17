@@ -24,11 +24,11 @@ const logger = createLogger({
   ),
   transports: [
     new transports.Console({ colorize: true, prettyPrint: true }),
-    new transports.File({ filename: 'logfile0.log' })
+    // new transports.File({ filename: 'log.log' })
   ],
   exceptionHandlers: [
     new transports.Console({ colorize: true, prettyPrint: true }),
-    new transports.File({ filename: 'exceptions.log' })
+    // new transports.File({ filename: 'exceptions.log' })
   ]
 });
 

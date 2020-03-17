@@ -14,7 +14,7 @@ const error = require("../middleware/error");
 
 module.exports = function (app) {
   app.use(cors());
-  app.use(bodyParser.json());
+  app.use(bodyParser.json()); // returns middleware that only parses json
   app.use(bodyParser.urlencoded({ extended: true })); // extended = arrays, complex objects in the www.instactical.com/api/users key=value&key=value
   app.use(express.static("public")); // static assets like css images in this folder.
   app.use(helmet());

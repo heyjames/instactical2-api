@@ -7,7 +7,6 @@ const authorize = require("../middleware/auth");
 const errMsg = "The About post with the given ID was not found.";
 
 router.get("/", async (req, res, next) => {
-  throw new Error("Could not get the genres...");
   const result = await About.find();
   res.send(result);
 });
