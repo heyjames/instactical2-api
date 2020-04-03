@@ -8,7 +8,7 @@ const _ = require("lodash");
 const authorize = require("../middleware/auth");
 // try npm i joi-password-complexity
 
-router.get("/me", authorize, async (req, res) => {
+router.get("/me", async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   res.send(user);
 });

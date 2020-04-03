@@ -16,6 +16,7 @@ const Announcement = mongoose.model('Announcements', new mongoose.Schema({
 
 function validateAnnouncement(announcement) {
   const schema = {
+    _id: Joi.string().min(1).max(50),
     content: Joi.string().min(1).max(255).required(),
     createdAt: Joi.date(),
     updatedAt: Joi.date()

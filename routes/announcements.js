@@ -7,7 +7,7 @@ const admin = require("../middleware/admin");
 
 const errMsg = "The announcement with the given ID was not found.";
 
-router.delete("/:id", [authorize, admin], async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const announcement = await Announcement.findByIdAndRemove(req.params.id);
   if (!announcement) return res.status(404).send(errMsg);
 
