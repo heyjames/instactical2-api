@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Joi = require('joi');
 
 const Guideline = new mongoose.model('Guideline', new mongoose.Schema({
   title: {
@@ -19,6 +20,8 @@ const Guideline = new mongoose.model('Guideline', new mongoose.Schema({
 
 function validateGuideline(guideline) {
   const schema = {
+    _id: Joi.string().min(1).max(50),
+    title: Joi.string().max(50),
     content: Joi.string().min(1).required()
   };
 

@@ -60,12 +60,19 @@ const Blogpost = mongoose.model('Blogposts', new mongoose.Schema({
 
 function validateBlogpost(blogpost) {
   const schema = {
+    _id: Joi.string().min(1).max(50),
     content: Joi.string().min(1).max(255).required(),
+    img: Joi.string().min(1).max(50).required(),
+    featured: Joi.string().required(),
+    slug: Joi.string().min(1).max(50).required(),
+    label: Joi.string().min(1).max(50).required(),
+    title: Joi.string().min(1).max(50).required(),
+    author: Joi.string().min(1).max(50),
     createdAt: Joi.date(),
     updatedAt: Joi.date()
   };
 
-  return Joi.validate(announcement, schema);
+  return Joi.validate(blogpost, schema);
 }
 
 exports.Blogpost = Blogpost;

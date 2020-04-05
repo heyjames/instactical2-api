@@ -20,6 +20,7 @@ const About = mongoose.model('About', new mongoose.Schema({
 
 function validateAbout(about) {
   const schema = {
+    _id: Joi.string().min(1).max(50),
     title: Joi.string().min(2).required(),
     content: Joi.string().min(2).required()
   };
