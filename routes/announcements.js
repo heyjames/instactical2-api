@@ -7,14 +7,14 @@ const admin = require("../middleware/admin");
 
 const errMsg = "The announcement with the given ID was not found.";
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", [authorize, admin], async (req, res) => {
   const announcement = await Announcement.findByIdAndRemove(req.params.id);
   if (!announcement) return res.status(404).send(errMsg);
 
   res.send(announcement);
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", [authorize], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
