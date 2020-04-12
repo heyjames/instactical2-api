@@ -14,7 +14,7 @@ router.delete("/:id", [authorize, admin], async (req, res) => {
   res.send(announcement);
 });
 
-router.put("/:id", [authorize], async (req, res) => {
+router.put("/:id", [authorize, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
   res.send(announce);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", [authorize, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 

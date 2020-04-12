@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Joi = require('joi');
 const { Guideline, validate } = require("../models/guideline");
+const authorize = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 const errMsg = "The guideline with the given ID was not found.";
 
@@ -11,7 +13,7 @@ router.get("/", async (req, res) => {
   res.send(guideline);
 });
 
-router.put("/", async (req, res) => {
+router.put("/", [authorize, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -28,7 +30,7 @@ router.put("/", async (req, res) => {
   res.send(guideline);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", [authorize, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 

@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Joi = require('joi');
 const { Blogpost, validate } = require("../models/blogpost");
+const authorize = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 const errMsgId = "The blog post with the given ID was not found.";
 const errMsgSlug = "The blog post with the given slug was not found.";
@@ -25,7 +27,7 @@ router.delete("/:slug", async (req, res) => {
   res.send(blogPost);
 });
 
-router.put("/:slug", async (req, res) => {
+router.put("/:slug", [authorize, admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -47,7 +49,7 @@ router.put("/:slug", async (req, res) => {
   res.send(blogPost);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", [authorize, admin], async (req, res) => {
   console.log(req.body);
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);

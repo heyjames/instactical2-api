@@ -3,6 +3,7 @@ const router = express.Router();
 const Joi = require('joi');
 const { About, validate } = require("../models/about");
 const authorize = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 const errMsg = "The About post with the given ID was not found.";
 
@@ -11,7 +12,7 @@ router.get("/", async (req, res, next) => {
   res.send(result);
 });
 
-router.put("/", async (req, res) => {
+router.put("/", [authorize, admin], async (req, res) => {
   const { error } = validate(req.body)
   if (error) return res.status(400).send(error.details[0].message);
 
