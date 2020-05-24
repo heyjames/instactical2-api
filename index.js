@@ -7,7 +7,7 @@
 // "set DEBUG=app:*", 
 // "set DEBUG=app:startup", 
 // "set DEBUG=", 
-// "DEBUG=app:startup,app:db", 
+// "set DEBUG=app:startup,app:db", 
 // Shortcut=>"DEBUG=app:startup nodemon index.js" 
 // to tell the module to only show us certain types
 
