@@ -11,28 +11,18 @@ router.get("/", [authorize, admin], async (req, res, next) => {
 });
 
 router.delete("/:steamId", [authorize, admin], async (req, res) => {
-  const cassandraPlayer = await Cassandraplayers.findOneAndDelete(req.params.steamId);
+  const cassandraPlayer = await Cassandraplayers.findOneAndDelete({ steamId: req.params.steamId });
   if (!cassandraPlayer) return res.status(404).send("The player with the given Steam ID was not found.");
 
   res.send(cassandraPlayer);
 });
 
-router.get("/:steamId", async (req, res) => {
+router.get("/:steamId", [authorize, admin], async (req, res) => {
   const cassandraPlayer = await Cassandraplayers.findOne({ steamId: req.params.steamId });
   if (!cassandraPlayer) return res.status(404).send("The player with the given Steam ID was not found.");
 
   res.send(cassandraPlayer);
 });
-
-
-
-
-
-
-
-
-
-
 
 router.patch("/:steamId", [authorize, admin], async (req, res) => {
   // const { error } = validate(req.body);
@@ -80,17 +70,6 @@ router.put("/:steamId", [authorize, admin], async (req, res) => {
   res.send(cassandraPlayer);
 });
 
-
-
-
-
-
-
-
-
-
-
-
 router.post("/", [authorize, admin], async (req, res) => {
   // console.log(req.body);
   const { error } = validate(req.body);
@@ -118,22 +97,5 @@ router.post("/", [authorize, admin], async (req, res) => {
 
   res.send(cassandraPlayer);
 });
-
-// router.put("/", [authorize, admin], async (req, res) => {
-//   const { error } = validate(req.body)
-//   if (error) return res.status(400).send(error.details[0].message);
-
-//   const about = await About.findByIdAndUpdate(
-//     req.body._id,
-//     {
-//       title: req.body.title,
-//       content: req.body.content
-//     },
-//     { new: true }
-//   );
-//   if (!about) return res.status(404).send(errMsg);
-
-//   res.send(about);
-// });
 
 module.exports = router;
