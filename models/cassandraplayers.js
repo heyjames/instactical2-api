@@ -13,7 +13,7 @@ const Cassandraplayers = mongoose.model('Cassandraplayers', new mongoose.Schema(
     type: String,
     required: false,
     trim: true,
-    maxlength: 350
+    maxlength: 500
   },
   classification: String,
   alias: [String],
@@ -26,7 +26,7 @@ function validateCassandraplayers(cassandraPlayers) {
   const schema = {
     _id: Joi.string().min(1).max(50),
     steamId: Joi.string().min(17).max(17).required().label("Steam ID"),
-    comments: Joi.string().max(350).allow("").label("Comments"),
+    comments: Joi.string().max(500).allow("").label("Comments"),
     classification: Joi.string().max(20).allow("").label("Classification"),
     alias: Joi.array().label("Alias"),
     fullBan: Joi.boolean().label("Full Ban"),
