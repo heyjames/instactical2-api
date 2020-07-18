@@ -9,6 +9,8 @@ const errMsg = "The About post with the given ID was not found.";
 
 router.get("/", async (req, res, next) => {
   const result = await About.find();
+  if (!result) return res.status(404).send(errMsg);
+
   res.send(result);
 });
 
