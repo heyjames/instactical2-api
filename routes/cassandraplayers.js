@@ -47,6 +47,25 @@ router.patch("/:steamId", [authorize, admin], async (req, res) => {
   res.send(cassandraPlayer);
 });
 
+//////////////////// To be extracted into its own file ////////////////////////
+// Updates the kicks array. Requires a lot of rework in 
+// cassandraPlayerKickForm.jsx. Status: Aborted.
+router.put("/:steamId/kick", [authorize, admin], async (req, res) => {
+  // const { error } = validate(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
+
+  const cassandraPlayer = await Cassandraplayers.updateOne(
+    { _id: req.body._id },
+    { $set: { kicks: req.body.kicks } }
+  );
+
+  const putError = "Something went wrong with patching.";
+  if (!cassandraPlayer) return res.status(404).send(putError);
+
+  res.send(cassandraPlayer);
+});
+///////////////////////////////////////////////////////////////////////////////
+
 router.put("/:steamId", [authorize, admin], async (req, res) => {
   // const { error } = validate(req.body);
   // if (error) return res.status(400).send(error.details[0].message);
