@@ -29,7 +29,7 @@ router.put("/:id", [authorize, admin], async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const announce = await Announcement.find();
+  const announce = await Announcement.find().sort('-createdAt');
   res.send(announce);
 });
 
