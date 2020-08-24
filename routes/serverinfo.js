@@ -5,6 +5,7 @@ const { http } = require("winston");
 // const fetch = require("node-fetch");
 // const request = require("request");
 const axios = require("axios");
+const authorize = require("../middleware/auth");
 
 const jsonString = {
   "name": "Cassandra.Confluvium 4 | Slow Mil-Tactical Squad Play Only",
@@ -104,7 +105,7 @@ router.get("/", async (req, res) => {
   res.json(jsonString);
 });
 
-router.get("/cass0", async (req, res) => {
+router.get("/cass0", [authorize], async (req, res) => {
   // fetch(config.get("api_server_info")) // TODO: @default.json, move IP as an env var?
   //   .then(res => res.json())
   //   .then(json => res.json(json))
@@ -125,7 +126,6 @@ router.get("/cass0", async (req, res) => {
     const cassUrl3 = "http://cassandra.confluvium.info/cassandra3.html";
     const cassUrl4 = "http://cassandra5.confluvium.info/ss-status/cassandra5.html";
 
-    // console.log("Hello, James.");
     const servers = [];
     const { data: cass0 } = await axios.get(cassUrl0);
     const { data: cass1 } = await axios.get(cassUrl1);

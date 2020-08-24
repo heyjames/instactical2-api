@@ -20,7 +20,7 @@ router.get("/:slug", async (req, res) => {
   res.send(blogPost);
 });
 
-router.delete("/:slug", async (req, res) => {
+router.delete("/:slug", [authorize, admin], async (req, res) => {
   const blogPost = await Blogpost.findOneAndDelete({ slug: req.params.slug });
   if (!blogPost) return res.status(404).send(errMsgSlug);
 
@@ -38,9 +38,7 @@ router.put("/:slug", [authorize, admin], async (req, res) => {
       img: req.body.img,
       featured: req.body.featured,
       slug: req.body.slug,
-      label: req.body.label,
       title: req.body.title,
-
     },
     { new: true }
   );
@@ -50,7 +48,6 @@ router.put("/:slug", [authorize, admin], async (req, res) => {
 });
 
 router.post("/", [authorize, admin], async (req, res) => {
-  console.log(req.body);
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -59,7 +56,6 @@ router.post("/", [authorize, admin], async (req, res) => {
     img: req.body.img,
     featured: req.body.featured,
     slug: req.body.slug,
-    label: req.body.label,
     title: req.body.title,
     author: req.body.author,
   });
