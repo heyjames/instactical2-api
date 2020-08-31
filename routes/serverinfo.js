@@ -4,8 +4,9 @@ const config = require("config");
 const { http } = require("winston");
 // const fetch = require("node-fetch");
 // const request = require("request");
-const axios = require("axios");
 const authorize = require("../middleware/auth");
+const { timeout } = require("../common/timeout");
+const { getRawServerData } = require("../services/cassandraServerService");
 
 const jsonString = {
   "name": "Cassandra.Confluvium 4 | Slow Mil-Tactical Squad Play Only",
@@ -105,46 +106,32 @@ router.get("/", async (req, res) => {
   res.json(jsonString);
 });
 
-router.get("/cass0", [authorize], async (req, res) => {
-  // fetch(config.get("api_server_info")) // TODO: @default.json, move IP as an env var?
-  //   .then(res => res.json())
-  //   .then(json => res.json(json))
-  //   .catch(error => res.send(error));
-
-  // const myJSON = JSON.stringify(jsonString);
+router.get("/currentcassandraplayers", [authorize], async (req, res) => {
+  const serverUrls = [
+    "http://cassandra0.confluvium.info/cassandra0.html",
+    "http://cassandra.confluvium.info/cassandra1.html",
+    "http://cassandra.confluvium.info/cassandra2.html",
+    "http://cassandra.confluvium.info/cassandra3.html",
+    "http://cassandra4.confluvium.info/cassandra0.html",
+    "http://cassandra5.confluvium.info/ss-status/cassandra5.html",
+    // "http://cassandra5.confluvium.info/ss-status/cassandra7.html", // 404
+    // "http://cassandra1.confluvium.info/ss-status/cassandra.html" // Never resolves
+  ];
+  const servers = [];
   
-  // request({
-  //   uri: "http://cassandra0.confluvium.info/cassandra0.html",
-  // }, function(error, response, body) {
-  //   console.log(body);
-  // });
+  for (let i = 0; i < serverUrls.length; i++) {
+    try {
+      const data = await Promise.race([
+        timeout(5000), getRawServerData(serverUrls[i])
+      ]);
 
-  try {
-    const cassUrl0 = "http://cassandra0.confluvium.info/cassandra0.html";
-    const cassUrl1 = "http://cassandra.confluvium.info/cassandra1.html";
-    const cassUrl2 = "http://cassandra.confluvium.info/cassandra2.html";
-    const cassUrl3 = "http://cassandra.confluvium.info/cassandra3.html";
-    const cassUrl4 = "http://cassandra5.confluvium.info/ss-status/cassandra5.html";
-
-    const servers = [];
-    const { data: cass0 } = await axios.get(cassUrl0);
-    const { data: cass1 } = await axios.get(cassUrl1);
-    const { data: cass2 } = await axios.get(cassUrl2);
-    const { data: cass3 } = await axios.get(cassUrl3);
-    const { data: cass4 } = await axios.get(cassUrl4);
-
-    servers.push(cass0);
-    servers.push(cass1);
-    servers.push(cass2);
-    servers.push(cass3);
-    servers.push(cass4);
-    
-    res.send(servers);
-  } catch (ex) {
-    console.log(ex.response);
+      if (data !== null) servers.push(data);
+    } catch (ex) {
+      console.log(ex.response.status);
+    }
   }
+
+  res.send(servers);
 });
-
-
 
 module.exports = router;
