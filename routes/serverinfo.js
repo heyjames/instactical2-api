@@ -112,7 +112,7 @@ router.get("/currentcassandraplayers", [authorize], async (req, res) => {
     "http://cassandra.confluvium.info/cassandra1.html",
     "http://cassandra.confluvium.info/cassandra2.html",
     "http://cassandra.confluvium.info/cassandra3.html",
-    "http://cassandra4.confluvium.info/cassandra0.html",
+    // "http://cassandra4.confluvium.info/cassandra0.html",
     "http://cassandra5.confluvium.info/ss-status/cassandra5.html",
     // "http://cassandra5.confluvium.info/ss-status/cassandra7.html", // 404
     // "http://cassandra1.confluvium.info/ss-status/cassandra.html" // Never resolves
@@ -130,7 +130,7 @@ router.get("/currentcassandraplayers", [authorize], async (req, res) => {
       console.log(ex.response.status);
     }
   }
-
+  
   res.send(servers);
 });
 
