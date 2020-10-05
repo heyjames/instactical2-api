@@ -1,0 +1,45 @@
+[
+  {
+    "title": "insTactical #1 (6+2)",
+    "subtitle": "Sandstorm Checkpoint Modded",
+    "sid": "eb2b529b-e021-4cf2-d1a3-1d6913238c7a",
+    "map": "Precinct_Checkpoint_Security",
+    "maxOccupancy": 8,
+    "playerCount": 4,
+    "currentObjective": "ODCheckpoint_D",
+    "uptime": "1:50:29",
+    "ip": "111.11.111.11:7777",
+    "status": true,
+    "players": [
+      {
+        "steamId": "76561190000000001",
+        "steamName": "Alice"
+      },
+      {
+        "steamId": "76561190000000002",
+        "steamName": "Bob"
+      },
+      {
+        "steamId": "76561190000000003",
+        "steamName": "Charlie"
+      },
+      {
+        "steamId": "76561190000000004",
+        "steamName": "Derek"
+      }
+    ]
+  },
+  {
+    "title": "insTactical #2 (8+2)",
+    "subtitle": "Sandstorm Checkpoint Modded",
+    "sid": "eb2b629b-b013-4cf2-e4b1-2d6913438c7a",
+    "map": "Precinct_Checkpoint_Security",
+    "maxOccupancy": 10,
+    "playerCount": 2,
+    "currentObjective": "ODCheckpoint_D",
+    "uptime": "3:26:11",
+    "ip": "222.22.222.22:7777",
+    "status": false,
+    "players": []
+  }
+]
