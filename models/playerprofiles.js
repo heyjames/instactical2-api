@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
-const Cassandraplayers = mongoose.model('Cassandraplayers', new mongoose.Schema({
+const Playerprofiles = mongoose.model('Playerprofiles', new mongoose.Schema({
   steamId: {
     type: String,
     required: true,
@@ -22,7 +22,7 @@ const Cassandraplayers = mongoose.model('Cassandraplayers', new mongoose.Schema(
   bans: [Object]
 }));
 
-function validateCassandraplayers(cassandraPlayers) {
+function validatePlayerProfile(playerProfiles) {
   const schema = {
     _id: Joi.string().min(1).max(50),
     steamId: Joi.string().min(17).max(17).required().label("Steam ID"),
@@ -34,8 +34,8 @@ function validateCassandraplayers(cassandraPlayers) {
     bans: Joi.array().label("Bans")
   };
 
-  return Joi.validate(cassandraPlayers, schema);
+  return Joi.validate(playerProfiles, schema);
 }
 
-exports.Cassandraplayers = Cassandraplayers;
-exports.validate = validateCassandraplayers;
+exports.Playerprofiles = Playerprofiles;
+exports.validate = validatePlayerProfile;

@@ -5,7 +5,7 @@ const guidelines = require("../routes/guidelines");
 const blogposts = require("../routes/blogposts");
 const announcements = require("../routes/announcements");
 const about = require("../routes/about");
-const cassandraplayers = require("../routes/cassandraplayers");
+const playerprofiles = require("../routes/playerprofiles");
 const serverinfo = require("../routes/serverinfo");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
@@ -27,6 +27,6 @@ module.exports = function (app) {
   app.use("/api/announcements", announcements);
   app.use("/api/about", about);
   app.use("/api/server", serverinfo);
-  app.use("/api/cassandraplayers", cassandraplayers);
+  app.use("/api/playerprofiles", playerprofiles);
   app.use(error);
 }

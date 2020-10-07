@@ -1,34 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const Joi = require('joi');
-const { Cassandraplayers, validate } = require("../models/cassandraplayers");
+const { Playerprofiles, validate } = require("../models/playerprofiles");
 const authorize = require("../middleware/auth");
 const admin = require("../middleware/admin");
 
 router.get("/", [authorize], async (req, res, next) => {
-  const result = await Cassandraplayers.find();
+  const result = await Playerprofiles.find();
   res.send(result);
 });
 
 router.delete("/:steamId", [authorize, admin], async (req, res) => {
-  const cassandraPlayer = await Cassandraplayers.findOneAndDelete({ steamId: req.params.steamId });
-  if (!cassandraPlayer) return res.status(404).send("The player with the given Steam ID was not found.");
+  const playerProfile = await Playerprofiles.findOneAndDelete({ steamId: req.params.steamId });
+  if (!playerProfile) return res.status(404).send("The player with the given Steam ID was not found.");
 
-  res.send(cassandraPlayer);
+  res.send(playerProfile);
 });
 
 router.get("/:steamId", [authorize], async (req, res) => {
-  const cassandraPlayer = await Cassandraplayers.findOne({ steamId: req.params.steamId });
-  if (!cassandraPlayer) return res.status(404).send("The player with the given Steam ID was not found.");
+  const playerProfile = await Playerprofiles.findOne({ steamId: req.params.steamId });
+  if (!playerProfile) return res.status(404).send("The player with the given Steam ID was not found.");
 
-  res.send(cassandraPlayer);
+  res.send(playerProfile);
 });
 
 // router.patch("/:steamId", [authorize, admin], async (req, res) => {
 //   // const { error } = validate(req.body);
 //   // if (error) return res.status(400).send(error.details[0].message);
 //   console.log("1111");
-//   const cassandraPlayer = await Cassandraplayers.findByIdAndUpdate(
+//   const playerProfile = await Playerprofiles.findByIdAndUpdate(
 //     { _id: req.body._id },
 //     {
 //       steamId: req.body.steamId,
@@ -41,28 +41,28 @@ router.get("/:steamId", [authorize], async (req, res) => {
 //     },
 //     { new: true }
 //   );
-//   // console.log(cassandraPlayer);
-//   if (!cassandraPlayer) return res.status(404).send("Something went wrong with patching.");
+//   // console.log(playerProfile);
+//   if (!playerProfile) return res.status(404).send("Something went wrong with patching.");
 
-//   res.send(cassandraPlayer);
+//   res.send(playerProfile);
 // });
 
 //////////////////// To be extracted into its own file ////////////////////////
 // Updates the kicks array. Requires a lot of rework in 
-// cassandraPlayerKickForm.jsx. Status: Aborted.
+// playerProfileKickForm.jsx. Status: Aborted.
 // router.put("/:steamId/kick", [authorize, admin], async (req, res) => {
 //   // const { error } = validate(req.body);
 //   // if (error) return res.status(400).send(error.details[0].message);
 
-//   const cassandraPlayer = await Cassandraplayers.updateOne(
+//   const playerProfile = await Playerprofiles.updateOne(
 //     { _id: req.body._id },
 //     { $set: { kicks: req.body.kicks } }
 //   );
 
 //   const putError = "Something went wrong with patching.";
-//   if (!cassandraPlayer) return res.status(404).send(putError);
+//   if (!playerProfile) return res.status(404).send(putError);
 
-//   res.send(cassandraPlayer);
+//   res.send(playerProfile);
 // });
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -70,7 +70,7 @@ router.put("/:steamId", [authorize, admin], async (req, res) => {
   // const { error } = validate(req.body);
   // if (error) return res.status(400).send(error.details[0].message);
   // console.log("2222");
-  const cassandraPlayer = await Cassandraplayers.findByIdAndUpdate(
+  const playerProfile = await Playerprofiles.findByIdAndUpdate(
     { _id: req.body._id },
     {
       steamId: req.body.steamId,
@@ -83,10 +83,10 @@ router.put("/:steamId", [authorize, admin], async (req, res) => {
     },
     { new: true }
   );
-  // console.log(cassandraPlayer);
-  if (!cassandraPlayer) return res.status(404).send("Something went wrong with patching.");
+  // console.log(playerProfile);
+  if (!playerProfile) return res.status(404).send("Something went wrong with patching.");
 
-  res.send(cassandraPlayer);
+  res.send(playerProfile);
 });
 
 router.post("/", [authorize, admin], async (req, res) => {
@@ -95,10 +95,10 @@ router.post("/", [authorize, admin], async (req, res) => {
   // console.log(`error: ${error}`);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let cassandraPlayer = await Cassandraplayers.findOne({ steamId: req.body.steamId });
-  if (cassandraPlayer) return res.status(400).send("Player already added.");
+  let playerProfile = await Playerprofiles.findOne({ steamId: req.body.steamId });
+  if (playerProfile) return res.status(400).send("Player already added.");
 
-  cassandraPlayer = new Cassandraplayers({
+  playerProfile = new Playerprofiles({
     steamId: req.body.steamId,
     comments: req.body.comments,
     classification: req.body.classification,
@@ -109,12 +109,12 @@ router.post("/", [authorize, admin], async (req, res) => {
   });
 
   try {
-    await cassandraPlayer.save();
+    await playerProfile.save();
   } catch (error) {
     console.log(`error: ${error}`);
   }
 
-  res.send(cassandraPlayer);
+  res.send(playerProfile);
 });
 
 module.exports = router;

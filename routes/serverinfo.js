@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
   res.json(result);
 });
 
-router.get("/currentcassandraplayers", [authorize], async (req, res) => {
+router.get("/currentcassplayers", [authorize], async (req, res) => {
   const serverUrls = [
     "http://cassandra0.confluvium.info/cassandra0.html",
     "http://cassandra.confluvium.info/cassandra1.html",
