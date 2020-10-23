@@ -1,5 +1,6 @@
 {
   "name": "My Express App",
-  "jwtPrivateKey": "",
-  "api_server_info": "http://insurgency.pro/api/45.77.203.74:27122"
+  "db": "mongodb://localhost/instactical2",
+  "port": "3001",
+  "jwtPrivateKey": ""
 }

@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const { logger } = require('../middleware/logger');
+const config = require('config');
 // const dbDebugger = require("debug")("app:db");
 
 
 module.exports = function () {
-  const db = "mongodb://localhost/instactical2";
+  const db = config.get('db');
 
   mongoose.set("useFindAndModify", false);
   mongoose.set("useCreateIndex", true);

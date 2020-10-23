@@ -17,11 +17,12 @@
 const express = require("express");
 const app = express();
 var { logger } = require('./middleware/logger');
+const config = require('config');
 
 require("./startup/logging")(); // Note: this is placed first.
 require("./startup/routes")(app);
 require("./startup/db")();
 require("./startup/config")(app);
 
-const port = 3001;
+const port = process.env.PORT || config.get("port");
 app.listen(port, function () { logger.info(`Listening on port ${port}...`) });

@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": "inst_jwtPrivateKey"
+  "jwtPrivateKey": "inst_jwtPrivateKey",
+  "db": "inst_db"
 }
