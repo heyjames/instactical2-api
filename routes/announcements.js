@@ -31,11 +31,11 @@ router.put("/:id", [authorize, admin], async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const announce = await Announcement.find().sort('-createdAt');
-  } catch (error) {
-    res.send("Something went horribly wrong.");
-  }
 
-  res.json(announce);
+    res.send(announce);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 router.post("/", [authorize, admin], async (req, res) => {
