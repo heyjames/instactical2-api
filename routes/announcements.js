@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
     res.send("Something went horribly wrong.");
   }
 
-  res.send(announce);
+  res.json(announce);
 });
 
 router.post("/", [authorize, admin], async (req, res) => {
