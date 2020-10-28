@@ -5,6 +5,7 @@ const guidelines = require("../routes/guidelines");
 const blogposts = require("../routes/blogposts");
 const announcements = require("../routes/announcements");
 const about = require("../routes/about");
+const notfound = require("../routes/notfound");
 const playerprofiles = require("../routes/playerprofiles");
 const serverinfo = require("../routes/serverinfo");
 const bodyParser = require("body-parser");
@@ -20,6 +21,7 @@ module.exports = function (app) {
   app.use(express.static("public")); // static assets like css images in this folder.
   app.use(helmet());
   app.use(express.json()); // Returns a middleware function. Reads request. If json object exists in body of request, it will parse body of request into a json object and set req.body property. And this happens at runtime.
+  
   app.use("/api/users", users);
   app.use("/api/auth", auth);
   app.use("/api/guidelines", guidelines);
@@ -28,5 +30,6 @@ module.exports = function (app) {
   app.use("/api/about", about);
   app.use("/api/server", serverinfo);
   app.use("/api/playerprofiles", playerprofiles);
+  app.use("/api", notfound);
   app.use(error);
 }
