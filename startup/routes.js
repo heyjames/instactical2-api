@@ -31,5 +31,6 @@ module.exports = function (app) {
   app.use("/api/server", serverinfo);
   app.use("/api/playerprofiles", playerprofiles);
   app.use("/api", notfound);
+  app.use("/", notfound);
   app.use(error);
 }
