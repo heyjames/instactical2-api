@@ -29,7 +29,12 @@ router.put("/:id", [authorize, admin], async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const announce = await Announcement.find().sort('-createdAt');
+  try {
+    const announce = await Announcement.find().sort('-createdAt');
+  } catch (error) {
+    res.send("Something went horribly wrong.");
+  }
+
   res.send(announce);
 });
 
