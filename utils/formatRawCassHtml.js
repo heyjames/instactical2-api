@@ -1,15 +1,15 @@
 const formatRawCassHtml = data => {
   const rawServerData = data.split("\n");
   const server = {};
-  server.title = getTitle(rawServerData[1]);
+  server.title = getTitle(rawServerData[2]);
   server.maxOccupancy = getMaxOccupancy(server.title);
-  server.subtitle = getSubtitle(rawServerData[2]);
-  server.sid = getSid(rawServerData[3]);
-  server.map = getMap(rawServerData[4]);
-  server.playerCount = getPlayerCount(rawServerData[5]);
-  server.currentObjective = getCurrentObjective(rawServerData[5]);
-  server.uptime = getUptime(rawServerData[6]);
-  server.ip = getIp(rawServerData[7]);
+  server.subtitle = getSubtitle(rawServerData[3]);
+  server.sid = getSid(rawServerData[4]);
+  server.map = getMap(rawServerData[5]);
+  server.playerCount = getPlayerCount(rawServerData[6]);
+  server.currentObjective = getCurrentObjective(rawServerData[6]);
+  server.uptime = getUptime(rawServerData[7]);
+  server.ip = getIp(rawServerData[8]);
   
   const playersIndex = rawServerData.findIndex(item => item.includes("<br>Names:"));
   const rawPlayersData = getPlayers(rawServerData[playersIndex]);
