@@ -12,5 +12,10 @@ module.exports = function () {
   mongoose.connect(db, { useUnifiedTopology: true, useNewUrlParser: true })
     // .then(() => dbDebugger(`Connecting to ${db}...`))
     .then(() => logger.info(`Connecting to ${db}...`))
-  // .catch(err => dbDebugger("Could not connect to MongoDB..."));
+    .catch(err => {
+      // dbDebugger("Could not connect to MongoDB...");
+      console.error("Could not connect to MongoDB...");
+
+      process.exit(1);
+    });
 }

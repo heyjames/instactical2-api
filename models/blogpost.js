@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const Blogpost = mongoose.model('Blogposts', new mongoose.Schema({
-  // "_id": false,
   featured: {
     type: String,
     required: true,
@@ -15,7 +14,7 @@ const Blogpost = mongoose.model('Blogposts', new mongoose.Schema({
     required: true,
     trim: true,
     minlength: 1,
-    maxlength: 255
+    maxlength: 2400
   },
   title: {
     type: String,
@@ -46,20 +45,20 @@ const Blogpost = mongoose.model('Blogposts', new mongoose.Schema({
     maxlength: 255
   }
 },
-  {
-    timestamps: true
-  }
+{
+  timestamps: true
+}
 ));
 
 function validateBlogpost(blogpost) {
   const schema = {
     _id: Joi.string().min(1).max(50),
     content: Joi.string().min(1).max(2400).required(),
-    img: Joi.string().min(1).max(50).required(),
+    img: Joi.string().min(1).max(255).required(),
     featured: Joi.string().required(),
-    slug: Joi.string().min(1).max(50).required(),
-    title: Joi.string().min(1).max(50).required(),
-    author: Joi.string().min(1).max(50),
+    slug: Joi.string().min(1).max(255).required(),
+    title: Joi.string().min(1).max(255).required(),
+    author: Joi.string().min(1).max(255),
     createdAt: Joi.date(),
     updatedAt: Joi.date()
   };

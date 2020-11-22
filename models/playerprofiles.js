@@ -15,7 +15,12 @@ const Playerprofiles = mongoose.model('Playerprofiles', new mongoose.Schema({
     trim: true,
     maxlength: 500
   },
-  classification: String,
+  classification: {
+    type: String,
+    required: false,
+    trim: true,
+    maxlength: 2
+  },
   alias: [String],
   fullBan: Boolean,
   kicks: [Object],
@@ -27,7 +32,7 @@ function validatePlayerProfile(playerProfiles) {
     _id: Joi.string().min(1).max(50),
     steamId: Joi.string().min(17).max(17).required().label("Steam ID"),
     comments: Joi.string().max(500).allow("").label("Comments"),
-    classification: Joi.string().max(20).allow("").label("Classification"),
+    classification: Joi.string().max(2).allow("").label("Classification"),
     alias: Joi.array().label("Alias"),
     fullBan: Joi.boolean().label("Full Ban"),
     kicks: Joi.array().label("Kicks"),
