@@ -17,7 +17,7 @@ module.exports = function (app) {
   startupDebugger(`NODE_ENV: ${process.env.NODE_ENV}`);
   startupDebugger(`app: ${app.get("env")}`);
   startupDebugger("Application Name: " + config.get("name"));
-  startupDebugger("Mail Server: " + config.get("mail.host"));
+  // startupDebugger("Mail Server: " + config.get("mail.host"));
   // startupDebugger("Mail Password: " + config.get("mail.password"));
   dbDebugger("Connected to the database...");
   if (app.get("env") === "development") {
