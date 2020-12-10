@@ -14,7 +14,7 @@ module.exports = function () {
     .then(() => logger.info(`Connecting to ${db}...`))
     .catch(err => {
       // dbDebugger("Could not connect to MongoDB...");
-      console.error("Could not connect to MongoDB...");
+      console.error("Could not connect to MongoDB...", db);
 
       process.exit(1);
     });

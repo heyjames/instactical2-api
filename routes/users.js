@@ -13,7 +13,7 @@ router.get("/profile", authorize, async (req, res) => {
   res.send(user);
 });
 
-// router.post("/", [authorize, admin], async (req, res) => {
+// router.post("/", async (req, res) => {
 //   const { error } = validate(req.body);
 //   if (error) return res.status(400).send(error.details[0].message);
 
@@ -27,15 +27,17 @@ router.get("/profile", authorize, async (req, res) => {
 
 //   try {
 //     await user.save();
+
+//     const token = user.generateAuthToken();
+  
+//     res.header("x-auth-token", token).header("access-control-expose-headers", "x-auth-token").send(_.pick(user, ["_id", "name", "email"]));
 //   } catch (ex) {
 //     for (field in ex.errors) {
 //       routeDebugger(ex.errors[field].message);
 //     }
+    
+//     return res.status(400).send("User registration failed.");
 //   }
-
-//   const token = user.generateAuthToken();
-
-//   res.header("x-auth-token", token).header("access-control-expose-headers", "x-auth-token").send(_.pick(user, ["_id", "name", "email"]));
 // });
 
 module.exports = router;
