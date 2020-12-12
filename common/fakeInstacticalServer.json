@@ -9,25 +9,8 @@
     "currentObjective": "ODCheckpoint_D",
     "uptime": "1:50:29",
     "ip": "111.11.111.11:7777",
-    "status": true,
-    "players": [
-      {
-        "steamId": "76561190000000001",
-        "steamName": "Alice"
-      },
-      {
-        "steamId": "76561190000000002",
-        "steamName": "Bob"
-      },
-      {
-        "steamId": "76561190000000003",
-        "steamName": "Charlie"
-      },
-      {
-        "steamId": "76561190000000004",
-        "steamName": "Derek"
-      }
-    ]
+    "status": false,
+    "players": []
   },
   {
     "title": "insTactical #2 (8+2)",
