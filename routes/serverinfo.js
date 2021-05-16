@@ -16,7 +16,6 @@ router.get("/currentcassplayers", [authorize], async (req, res) => {
   const serverUrls = [
     "http://cassandra0.confluvium.info/cassandra0.html",
     "http://cassandra.confluvium.info/cassandra1.html",
-    "http://cassandra.confluvium.info/cassandra2.html",
     "http://cassandra.confluvium.info/cassandra3.html",
     "http://cassandra4.confluvium.info/ss-status/cassandra5.html"
   ];
